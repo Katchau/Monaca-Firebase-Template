@@ -14,7 +14,7 @@
                 </f7-list-item>
             </f7-list>
             <f7-list>
-                <f7-list-button title="Continue" ></f7-list-button>
+                <f7-list-button title="Sign In" ></f7-list-button>
             </f7-list>
             <f7-list>
                 <f7-list-button title="Homepage" login-screen-close></f7-list-button>
