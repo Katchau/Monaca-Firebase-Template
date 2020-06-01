@@ -13,9 +13,7 @@
         <f7-block-header>
             List of TODOs created!
         </f7-block-header>
-        <f7-block>
-            <f7-view id="main-view" url="/lists/" lists></f7-view>
-        </f7-block>
+        <f7-view id="my-lists-view" url="/lists/" my-lists></f7-view>
     </f7-page>
 </template>
 
