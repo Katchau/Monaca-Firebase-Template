@@ -32,7 +32,7 @@
                 let successMethod = function (camera_url) {
                     this.previewImg = camera_url;
                 };
-                navigator.camera.getPicture(addTodo,
+                navigator.camera.getPicture(successMethod,
                     function() {
                         alert("Failed to get camera.");
                     }, {

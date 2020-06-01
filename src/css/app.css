@@ -1,6 +1,14 @@
 /* Your app styles here */
+#main-view .page-content {
+    padding: 25% 0;
+}
+
+#my-lists-view .page-content {
+    padding: 0;
+}
+
 .block-header.landing-header {
-    margin-top: 35%;
+    /*margin-top: 35%;*/
     text-align: center;
 }
 

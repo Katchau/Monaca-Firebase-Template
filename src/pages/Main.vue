@@ -13,6 +13,9 @@
         <h2>
             List of current TODOs created!
         </h2>
+        <f7-list-item link="/create/">
+            Add a new TODO list
+        </f7-list-item>
         <f7-view id="my-lists-view" url="/lists/" my-lists></f7-view>
     </f7-page>
 </template>
