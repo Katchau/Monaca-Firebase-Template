@@ -19,7 +19,8 @@
                 </f7-list-item>
             </f7-list>
             <f7-list>
-                <f7-list-button title="Continue" />
+                <f7-list-button href="/main/" title="Continue" login-screen-close/>
+<!--                <f7-list-item link="/main" title="Continue"></f7-list-item>-->
             </f7-list>
             <f7-list>
                 <f7-list-button title="Homepage" login-screen-close />
