@@ -1,5 +1,6 @@
 import * as firebase from "firebase/app";
 // firebase plugins and utilities imports goes here
+import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 
@@ -19,6 +20,7 @@ firebase.initializeApp(firebaseConfig);
 // firebase utils
 const db = firebase.firestore();
 const storage = firebase.storage();
+const auth = firebase.auth();
 // const auth = firebase.auth();
 // const currentUser = auth.currentUser
 //
@@ -35,6 +37,7 @@ const storage = firebase.storage();
 // const likesCollection = db.collection('likes')
 
 export {
+    auth,
     db,
     storage
 }

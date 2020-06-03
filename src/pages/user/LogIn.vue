@@ -5,8 +5,8 @@
             <f7-login-screen-title>Login</f7-login-screen-title>
             <f7-list form>
                 <f7-list-item>
-                    <f7-label>Username</f7-label>
-                    <f7-input name="username" placeholder="Username" type="text"></f7-input>
+                    <f7-label>Email</f7-label>
+                    <f7-input name="email" placeholder="Email" type="email"></f7-input>
                 </f7-list-item>
                 <f7-list-item>
                     <f7-label>Password</f7-label>
