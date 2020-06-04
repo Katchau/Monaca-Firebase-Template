@@ -22,6 +22,15 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 const auth = firebase.auth();
 
+auth.onAuthStateChanged(function(user) {
+    if (user) {
+        console.log(`User ${user.email} has signed in!`);
+    } else {
+        // this.$f7router.navigate('/', {
+        // })
+    }
+});
+
 let isLoggedIn = function () {
     return auth.currentUser !== null;
 };

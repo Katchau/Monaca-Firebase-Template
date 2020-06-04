@@ -27,10 +27,8 @@
         name: "Main",
         methods: {
             logOut() {
-                let self = this
-                fb.auth.signOut().then(function () {
-                    self.$f7router.navigate('/');
-                });
+                fb.auth.signOut();
+                this.$f7router.navigate('/');
             }
         }
     }
