@@ -23,14 +23,21 @@ import App from './app.vue';
 // Init F7 Vue Plugin
 Framework7.use(Framework7Vue)
 
+let app;
+fb.auth.onAuthStateChanged(function (user){
+  if (!app) {
+    // Init App
+    app = new Vue({
+      el: '#app',
+      template: '<app/>',
 
-// Init App
-new Vue({
-  el: '#app',
-  template: '<app/>',
+      // Register App Component
+      components: {
+        app: App
+      }
+    });
+  }
+  if (user) {
 
-  // Register App Component
-  components: {
-    app: App
   }
 });

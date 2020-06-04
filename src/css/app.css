@@ -1,5 +1,5 @@
 /* Your app styles here */
-#main-view .page-content {
+#main-view .page-content, #main-menu-view .page-content {
     padding: 25% 2%;
 }
 

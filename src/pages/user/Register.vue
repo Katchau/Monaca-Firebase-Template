@@ -25,7 +25,6 @@
             </f7-list>
             <f7-list>
                 <f7-list-button @click="register()" title="Sign In"/>
-<!--                <f7-list-item link="/main" title="Continue"></f7-list-item>-->
             </f7-list>
             <f7-list>
                 <f7-list-button title="Homepage" login-screen-close />
@@ -41,11 +40,13 @@
     const fb = require('@/firebaseConfig.js');
     export default {
         name: "Register",
+
         data () {
             return {
                 errorMsg: ''
             }
         },
+
         methods: {
             register() {
                 this.errorMsg = '';
@@ -75,6 +76,7 @@
                         // Handle Errors here.
                         self.errorMsg = error.message;
                     });
+
                 // app.dialog.alert('Username: ' + username + '<br>Password: ' + password);
             }
         }
