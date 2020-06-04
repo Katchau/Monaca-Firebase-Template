@@ -21,6 +21,19 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
 const auth = firebase.auth();
+
+auth.onAuthStateChanged(function(user) {
+    if (user) {
+        console.log(`User ${user.email} has signed in!`);
+    } else {
+        // this.$f7router.navigate('/', {
+        // })
+    }
+});
+
+let isLoggedIn = function () {
+    return auth.currentUser !== null;
+};
 // const auth = firebase.auth();
 // const currentUser = auth.currentUser
 //
@@ -39,5 +52,6 @@ const auth = firebase.auth();
 export {
     auth,
     db,
-    storage
+    storage,
+    isLoggedIn
 }

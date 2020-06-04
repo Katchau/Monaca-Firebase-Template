@@ -5,7 +5,7 @@
                 My TODO list
             </f7-nav-title>
             <f7-nav-right>
-                <f7-link @click="$f7router.back()">
+                <f7-link @click="logOut()">
                     Log Out
                 </f7-link>
             </f7-nav-right>
@@ -22,8 +22,15 @@
 </template>
 
 <script>
+    const fb = require('@/firebaseConfig.js');
     export default {
-        name: "Main"
+        name: "Main",
+        methods: {
+            logOut() {
+                fb.auth.signOut();
+                this.$f7router.navigate('/');
+            }
+        }
     }
 </script>
 

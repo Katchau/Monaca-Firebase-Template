@@ -1,21 +1,22 @@
 <template>
     <!-- Register Screen -->
     <!-- You could also use the f7 popup. Everything is the same, just need to change the name    -->
-    <f7-login-screen id="register-screen">
+    <f7-login-screen id="register-screen" ref="reg">
         <f7-page login-screen>
             <f7-login-screen-title>Register</f7-login-screen-title>
+            <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
             <f7-list form>
                 <f7-list-item>
                     <f7-label>Username</f7-label>
-                    <f7-input name="username" placeholder="Your new Username" type="text" />
+                    <f7-input name="username" placeholder="Your new Username" type="text" required />
                 </f7-list-item>
                 <f7-list-item>
                     <f7-label>Email</f7-label>
-                    <f7-input name="email" placeholder="Your Email Address" type="text" />
+                    <f7-input name="email" placeholder="Your Email Address" type="text" required />
                 </f7-list-item>
                 <f7-list-item>
                     <f7-label>Password</f7-label>
-                    <f7-input name="password" type="password" placeholder="Password" />
+                    <f7-input name="password" type="password" placeholder="Password" required />
                 </f7-list-item>
                 <f7-list-item>
                     <f7-label>Password Confirmation</f7-label>
@@ -23,8 +24,7 @@
                 </f7-list-item>
             </f7-list>
             <f7-list>
-                <f7-list-button @click="register()" title="Continue"/>
-                <f7-list-button href="/main/" title="Continue" login-screen-close hidden/>
+                <f7-list-button @click="register()" title="Sign In"/>
 <!--                <f7-list-item link="/main" title="Continue"></f7-list-item>-->
             </f7-list>
             <f7-list>
@@ -41,30 +41,39 @@
     const fb = require('@/firebaseConfig.js');
     export default {
         name: "Register",
+        data () {
+            return {
+                errorMsg: ''
+            }
+        },
         methods: {
             register() {
+                this.errorMsg = '';
+                let self = this;
                 let username = this.$$('#register-screen [name="username"]').val();
                 let email = this.$$('#register-screen [name="email"]').val();
                 let password = this.$$('#register-screen [name="password"]').val();
                 let password2 = this.$$('#register-screen [name="passwordconf"]').val();
 
                 if (password !== password2) {
-                    app.dialog.alert('Passwords do not match! Please try again');
+                    this.errorMsg = 'Passwords do not match! Please try again';
                     return false;
                 }
 
                 if (!username || !email || !password) {
-                    app.dialog.alert('Please fill in the missing input fields');
+                    this.errorMsg = 'Please fill in the missing input fields';
                     return false;
                 }
 
                 fb.auth.createUserWithEmailAndPassword(email, password)
                     .then(function (answer) {
-                        console.log(answer)
+                        console.log(answer);
+                        self.$f7router.navigate('/main/');
+                        self.$refs.reg.close();
                     })
                     .catch(function(error) {
                         // Handle Errors here.
-                        console.log(error.message)
+                        self.errorMsg = error.message;
                     });
                 // app.dialog.alert('Username: ' + username + '<br>Password: ' + password);
             }

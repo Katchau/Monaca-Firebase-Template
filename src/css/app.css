@@ -31,3 +31,8 @@
 .add-button {
     width: 200px;
 }
+
+.red-text {
+    color: orangered;
+    text-align: center;
+}
