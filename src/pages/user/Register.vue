@@ -68,8 +68,11 @@
 
                 fb.auth.createUserWithEmailAndPassword(email, password)
                     .then(function (answer) {
-                        console.log(answer);
-                        self.$$('.close a').click();
+                        return answer.user.updateProfile({
+                            displayName: username
+                        }).then(function () {
+                            self.$$('.close a').click();
+                        })
                     })
                     .catch(function(error) {
                         // Handle Errors here.
