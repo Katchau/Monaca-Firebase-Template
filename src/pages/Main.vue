@@ -1,5 +1,5 @@
 <template>
-    <f7-page>
+    <f7-page id="main-menu">
         <f7-navbar>
             <f7-nav-title>
                 {{username}}'s TODO lists

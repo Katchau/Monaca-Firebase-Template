@@ -8,13 +8,13 @@
             />
             <f7-list-item v-for="(todo, key) in todoList" :key="key" @click="$refs.popup.open(key)">
                 <b>
-                    {{todo.title}}
+                    {{todo.name}}
                 </b>
                 <p>
                     {{todo.description}}
                 </p>
                 <span>
-                    {{todo.dateCreated}}
+                    {{todo.date}}
                 </span>
             </f7-list-item>
         </f7-list>
@@ -22,26 +22,38 @@
 </template>
 
 <script>
+    const fb = require('@/firebaseConfig.js');
     export default {
         name: "Lists",
         data () {
             return {
-                curImgURL: ["https://media0.giphy.com/media/IB9foBA4PVkKA/giphy.gif", "https://media3.giphy.com/media/KFhv3T1seYSJuak8TN/giphy.gif"],
-                todoList: [
-                    {
-                        id: "idk23894239",
-                        title: "Shopping List",
-                        description: "I really need bananas, please dont forget them",
-                        dateCreated: "01/06/2020"
-                    },
-                    {
-                        id: "idk23894239",
-                        title: "List of Missing Bugs",
-                        description: "Animal crossing wiki is lame",
-                        dateCreated: "01/06/2020"
-                    }
-                ]
+                curImgURL: [],
+                todoList: []
             }
+        },
+        computed: {
+            getDbCollection () {
+                return fb.db.collection("todos").where("uid", "==", fb.auth.currentUser.uid);
+            }
+        },
+        beforeMount () {
+            let self = this;
+            this.todoList = [];
+            this.curImgURL = [];
+            let listQuery = this.getDbCollection;
+
+            let updateList = function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    self.todoList.push(doc.data());
+                    self.curImgURL.push(doc.data().imgURL)
+                });
+            };
+
+            listQuery.get()
+                .then(updateList)
+                .catch(function(error) {
+                    console.log("Error getting documents: ", error);
+                });
         }
     }
 </script>

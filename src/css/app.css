@@ -3,7 +3,11 @@
     padding: 25% 2%;
 }
 
-#my-lists-view .page-content {
+#main-menu .page-content {
+    padding: 64px 0 0 0;
+}
+
+#my-lists-view .page-content{
     padding: 0;
 }
 

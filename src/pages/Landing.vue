@@ -24,7 +24,6 @@
             let self = this;
             fb.auth.onAuthStateChanged(user => {
                 if (user) {
-                    console.log(user);
                     // TODO try changing to the router navigator after update because that isnt working rn
                     self.$$('.closemain a').click();
                 }
