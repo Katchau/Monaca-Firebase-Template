@@ -4,7 +4,7 @@
         <f7-page login-screen>
             <f7-login-screen-title>Login</f7-login-screen-title>
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
-            <f7-list-button class="close" href="/main/" title="Continue" style="display: none" login-screen-close></f7-list-button>
+            <f7-list-button class="close-login hidden" title="Continue" login-screen-close></f7-list-button>
             <f7-list form>
                 <f7-list-item>
                     <f7-label>Email</f7-label>
@@ -57,7 +57,7 @@
                 fb.auth.signInWithEmailAndPassword(email, password)
                     .then(function (answer) {
                         console.log(answer);
-                        self.$$('.close a').click();
+                        self.$$('#login-screen .close-login a').click();
                     })
                     .catch(function(error) {
                         // Handle Errors here.

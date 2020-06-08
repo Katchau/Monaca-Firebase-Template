@@ -12,7 +12,7 @@
                 <f7-button fill raised login-screen-open="#login-screen">Login Screen</f7-button>
             </f7-list>
         </f7-block>
-        <f7-list-button class="close" href="/main/" style="display: none"></f7-list-button>
+        <f7-list-button class="closemain hidden" href="/main/"></f7-list-button>
     </f7-page>
 </template>
 
@@ -26,7 +26,7 @@
                 if (user) {
                     console.log(user);
                     // TODO try changing to the router navigator after update because that isnt working rn
-                    self.$$('.close a').click();
+                    self.$$('.closemain a').click();
                 }
             })
         }

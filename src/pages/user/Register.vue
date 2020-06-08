@@ -5,7 +5,7 @@
         <f7-page login-screen>
             <f7-login-screen-title>Register</f7-login-screen-title>
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
-            <f7-list-button class="close" href="/main/" title="Continue" style="display: none" login-screen-close></f7-list-button>
+            <f7-list-button class="close-register hidden" href="/main/" title="Continue" login-screen-close></f7-list-button>
             <f7-list form>
                 <f7-list-item>
                     <f7-label>Username</f7-label>
@@ -71,7 +71,7 @@
                         return answer.user.updateProfile({
                             displayName: username
                         }).then(function () {
-                            self.$$('.close a').click();
+                            self.$$('.close-register a').click();
                         })
                     })
                     .catch(function(error) {
