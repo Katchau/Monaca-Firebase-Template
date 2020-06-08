@@ -11,10 +11,11 @@
                     </f7-link>
                 </f7-nav-right>
             </f7-navbar>
+            <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
             <f7-list form>
                 <f7-list-item>
                     <f7-label>Name of your list</f7-label>
-                    <f7-input name="list-name" type="text" placeholder="My todo list Name" required></f7-input>
+                    <f7-input name="list-name" type="text" placeholder="My todo list Name"></f7-input>
                 </f7-list-item>
                 <f7-list-item>
                     <f7-label>Description</f7-label>
@@ -43,6 +44,7 @@
 
         data () {
             return {
+                errorMsg: '',
                 previewImg: '',
                 imgFile: null
             }
@@ -83,7 +85,8 @@
 
             updateDatabase(downloadURL) {
 
-                let name = this.$$('#creation-page .input-with-value[name="list-name"]').val();
+                let name = this.$$('#creation-page .input-with-value[name="list-name"]').val()
+                    || new Date().toDateString() + ' list';
                 let description = this.$$('#creation-page .input-with-value[name="description"]').val();
                 let date = new Date();
                 let self = this;
@@ -105,8 +108,10 @@
             },
 
             submitForm() {
+                this.errorMsg = '';
                 if (!this.previewImg) {
-                    return false
+                    this.errorMsg = 'Missing Picture!';
+                    return false;
                 }
                 let self = this;
                 let ref = fb.storage.ref();
