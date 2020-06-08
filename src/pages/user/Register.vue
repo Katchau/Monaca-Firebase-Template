@@ -5,6 +5,7 @@
         <f7-page login-screen>
             <f7-login-screen-title>Register</f7-login-screen-title>
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
+            <f7-list-button class="close" href="/main/" title="Continue" style="display: none" login-screen-close></f7-list-button>
             <f7-list form>
                 <f7-list-item>
                     <f7-label>Username</f7-label>
@@ -67,9 +68,11 @@
 
                 fb.auth.createUserWithEmailAndPassword(email, password)
                     .then(function (answer) {
-                        console.log(answer);
-                        self.$f7router.navigate('/main/');
-                        self.$refs.reg.close();
+                        return answer.user.updateProfile({
+                            displayName: username
+                        }).then(function () {
+                            self.$$('.close a').click();
+                        })
                     })
                     .catch(function(error) {
                         // Handle Errors here.

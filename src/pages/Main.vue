@@ -2,7 +2,7 @@
     <f7-page>
         <f7-navbar>
             <f7-nav-title>
-                My TODO list
+                {{username}}'s TODO lists
             </f7-nav-title>
             <f7-nav-right>
                 <f7-link @click="logOut()">
@@ -25,6 +25,13 @@
     const fb = require('@/firebaseConfig.js');
     export default {
         name: "Main",
+
+        data () {
+            return {
+                username: fb.auth.currentUser.displayName
+            }
+        },
+
         methods: {
             logOut() {
                 fb.auth.signOut();
