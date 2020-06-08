@@ -32,6 +32,11 @@
     width: 200px;
 }
 
+#creation-page .add-button {
+    padding-left: 16px;
+    text-align: left;
+}
+
 .red-text {
     color: orangered;
     text-align: center;

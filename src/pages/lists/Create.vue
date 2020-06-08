@@ -25,7 +25,7 @@
                     Take a photo of your list
                 </f7-list-button>
                 <img :src="previewImg" alt="" height="250px"/>
-                <f7-button class="add-button" @click="submitForm()">
+                <f7-button class="add-button" @click="submitForm()" small>
                     Submit
                 </f7-button>
             </f7-list>
@@ -82,7 +82,7 @@
             },
 
             updateDatabase(downloadURL) {
-                console.log('File available at', downloadURL);
+
                 let name = this.$$('#creation-page .input-with-value[name="list-name"]').val();
                 let description = this.$$('#creation-page .input-with-value[name="description"]').val();
                 let date = new Date();
@@ -100,7 +100,7 @@
                         self.$refs.cPopUp.close();
                     })
                     .catch(function(error) {
-                        console.log("Error at updating database " + error.toString())
+                        console.log("Error at updating database " + error.message)
                     });
             },
 
@@ -114,6 +114,7 @@
                 let fileName = `${Date.now()}.${this.getFileExtension(this.imgFile.name)}`;
 
                 let uploadTask = ref.child(`images/${fb.auth.currentUser.uid}/${fileName}`).put(this.imgFile);
+
                 // Listen for state changes, errors, and completion of the upload.
                 uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
                     function(snapshot) {
