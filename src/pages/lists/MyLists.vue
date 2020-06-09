@@ -56,7 +56,10 @@
                 });
             };
 
-            listQuery.onSnapshot(updateList);
+            listQuery.onSnapshot(updateList,
+                function(error) {
+                    console.log('Error updating List ' + error.message)
+                });
         }
     }
 </script>
