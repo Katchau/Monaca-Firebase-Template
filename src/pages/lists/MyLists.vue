@@ -28,7 +28,8 @@
         data () {
             return {
                 curImgURL: [],
-                todoList: []
+                todoList: [],
+                fbListener: null
             }
         },
         computed: {
@@ -56,7 +57,7 @@
                 });
             };
 
-            listQuery.onSnapshot(updateList,
+            this.fbListener = listQuery.onSnapshot(updateList,
                 function(error) {
                     console.log('Error updating List ' + error.message)
                 });
