@@ -37,23 +37,26 @@
             }
         },
         beforeMount () {
+            // let meta1 = "img-src 'self' blob: ; default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'";
+            // let meta2 = "img-src * ; default-src * 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;"
+            // this.$$('meta[http-equiv="Content-Security-Policy"]').attr('content', meta2);
+
             let self = this;
             this.todoList = [];
             this.curImgURL = [];
             let listQuery = this.getDbCollection;
 
             let updateList = function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
-                    self.todoList.push(doc.data());
-                    self.curImgURL.push(doc.data().imgURL)
+                let first = self.todoList.length === 0;
+                querySnapshot.docChanges().forEach(function(change) {
+                    if (change.type === "added" || first) {
+                        self.todoList.push(change.doc.data());
+                        self.curImgURL.push(change.doc.data().imgURL);
+                    }
                 });
             };
 
-            listQuery.get()
-                .then(updateList)
-                .catch(function(error) {
-                    console.log("Error getting documents: ", error);
-                });
+            listQuery.onSnapshot(updateList);
         }
     }
 </script>

@@ -83,12 +83,21 @@
                 return filename.slice(filename.lastIndexOf(".") + 1, filename.length);
             },
 
+            getCurrentDate() {
+                let dateObj = new Date();
+                let month = dateObj.getUTCMonth() + 1; //months from 1-12
+                let day = dateObj.getUTCDate();
+                let year = dateObj.getUTCFullYear();
+
+                return `${day}/${month}/${year}`;
+            },
+
             updateDatabase(downloadURL) {
 
                 let name = this.$$('#creation-page .input-with-value[name="list-name"]').val()
                     || new Date().toDateString() + ' list';
                 let description = this.$$('#creation-page .input-with-value[name="description"]').val();
-                let date = new Date();
+                let date = this.getCurrentDate();
                 let self = this;
 
                 fb.db.collection("todos").add({
