@@ -1,0 +1,51 @@
+/* Your app styles here */
+#main-view .page-content {
+    padding: 25% 2%;
+}
+
+#main-menu .page-content {
+    padding: 64px 0 0 0;
+}
+
+#my-lists-view .page-content{
+    padding: 0;
+}
+
+.block-header.landing-header {
+    /*margin-top: 35%;*/
+    text-align: center;
+}
+
+.landing-header h1{
+    font-size: 2.5em;
+}
+
+.landing-header h3{
+    padding: 0 10%;
+}
+
+#landing-body {
+    margin-top: 10%;
+}
+
+#landing-body::after{
+    content: none;
+}
+
+.add-button {
+    width: 200px;
+}
+
+#creation-page .add-button {
+    padding-left: 16px;
+    text-align: left;
+}
+
+.red-text {
+    color: orangered;
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
