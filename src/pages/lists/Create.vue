@@ -62,9 +62,8 @@
         methods: {
 
             takePhoto () {
-                let app = new Framework7();
                 // TODO this still needs testing but the online thingy isnt building up the project properly
-                if (app.device.android || app.device.ios) {
+                if (Framework7.device.android || Framework7.device.ios) {
                     let successMethod = function (camera_url) {
                         this.previewImg = camera_url;
                     };

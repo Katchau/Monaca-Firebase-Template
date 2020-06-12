@@ -36,7 +36,7 @@ let webpackConfig = {
     mergeDuplicateChunks: true,
     providedExports: true,
   },
-  
+
   resolve: {
     extensions: ['.js', '.vue', '.json', '.css', '.html', '.styl'],
     modules: [
@@ -66,7 +66,7 @@ let webpackConfig = {
           loader: 'babel-loader',
           options: {
             presets: [ 'env' ]
-          } 
+          }
         }]
       },
       {
@@ -89,7 +89,7 @@ let webpackConfig = {
       },
       {
         test: /\.css$/,
-        use: [          
+        use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
@@ -102,12 +102,21 @@ let webpackConfig = {
         ]
       },
       {
+        test: /\.less$/,
+        use: [
+          devMode ? 'style-loader' :  MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'less-loader',
+        ],
+      },
+      {
         test: /\.json$/,
         loader: 'json'
       }
     ]
   },
-  
+
   // See below for dev plugin management.
   plugins: [
     new VueLoaderPlugin(),
@@ -117,11 +126,11 @@ let webpackConfig = {
     }),
     new ProgressBarPlugin(),
   ],
- 
+
   resolveLoader: {
     modules: [ 'node_modules' ]
   },
- 
+
   performance: {
     hints: false
   }
@@ -163,7 +172,7 @@ if(devMode) {
   webpackConfig.plugins = webpackConfig.plugins.concat( devPlugins　);
 
 } else {
-  
+
   // Production mode
   let prodPlugins = [
     new HtmlWebPackPlugin({
