@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    const fb = require('@/firebaseConfig.js');
+    const fb = require('@/js/firebaseConfig.js');
     export default {
         name: "Main",
 

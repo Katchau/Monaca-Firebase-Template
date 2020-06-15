@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    const fb = require('@/firebaseConfig');
+    const fb = require('@/js/firebaseConfig');
 
     export default {
         mounted () {

@@ -42,7 +42,7 @@
 <script>
     import Framework7 from "framework7";
     import firebase from "firebase"
-    const fb = require('@/firebaseConfig.js');
+    const fb = require('@/js/firebaseConfig.js');
 
     export default {
         name: "Create",

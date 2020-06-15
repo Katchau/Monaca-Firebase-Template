@@ -19,7 +19,7 @@ let webpackConfig = {
   mode: devMode ? 'development' : 'production',
 
   entry: {
-    app: ['./src/app.js']
+    app: ['./src/js/app.js']
   },
 
   output: {

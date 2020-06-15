@@ -1,9 +1,9 @@
-import HomePage from './pages/Landing.vue';
-import LogIn from "./pages/user/LogIn";
-import Register from "./pages/user/Register"
-import MainMenu from "./pages/Main"
-import CreateLists from "./pages/lists/Create"
-import MyLists from "./pages/lists/MyLists"
+import HomePage from '@/pages/Landing.vue';
+import LogIn from "@/pages/user/LogIn";
+import Register from "@/pages/user/Register"
+import MainMenu from "@/pages/Main"
+import CreateLists from "@/pages/lists/Create"
+import MyLists from "@/pages/lists/MyLists"
 
 export default [
   {
