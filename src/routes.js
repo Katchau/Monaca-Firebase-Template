@@ -20,7 +20,12 @@ export default [
   },
   {
     path: '/main/',
-    component: MainMenu
+    component: MainMenu,
+    options: {
+      props: {
+        displayName: 'User'
+      },
+    },
   },
   {
     path: '/create/',

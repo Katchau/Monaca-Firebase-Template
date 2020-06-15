@@ -26,16 +26,18 @@
     export default {
         name: "Main",
 
+        props: ['displayName'],
+
         data () {
             return {
-                username: fb.auth.currentUser.displayName
+                username: fb.auth.currentUser.displayName || this.displayName
             }
         },
 
         methods: {
             logOut() {
                 fb.auth.signOut();
-                this.$f7router.navigate('/');
+                this.$f7router.back();
             }
         }
     }

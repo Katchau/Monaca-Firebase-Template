@@ -4,7 +4,6 @@
         <f7-page login-screen>
             <f7-login-screen-title>Login</f7-login-screen-title>
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
-            <f7-list-button class="close-login hidden" title="Continue" login-screen-close></f7-list-button>
             <f7-list form>
                 <f7-list-input
                         label="Email"
@@ -44,9 +43,6 @@
         },
 
         methods: {
-            penis() {
-                this.$refs.penis.link.click();
-            },
             login() {
                 this.errorMsg = '';
                 let self = this;
@@ -60,8 +56,7 @@
 
                 fb.auth.signInWithEmailAndPassword(email, password)
                     .then(function (answer) {
-                        console.log(answer);
-                        self.$$('#login-screen .close-login a').click();
+                        self.$refs.log.close();
                     })
                     .catch(function(error) {
                         // Handle Errors here.

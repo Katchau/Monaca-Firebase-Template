@@ -82,7 +82,14 @@
                         return answer.user.updateProfile({
                             displayName: username
                         }).then(function () {
-                            self.$$('.close-register a').click();
+                            // self.$$('.close-register a').click();
+                            // f7router would'nt work here since this isn't the main activity
+                            self.$f7.views.main.router.navigate('/main/', {
+                                props: {
+                                    displayName: username,
+                                }
+                            });
+                            self.$refs.reg.close();
                         })
                     })
                     .catch(function(error) {
