@@ -13,23 +13,19 @@
             </f7-navbar>
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
             <f7-list form>
-                <f7-list-item>
-                    <f7-input
-                            label="Name of your list"
-                            name="list-name"
-                            type="text"
-                            placeholder="My todo list Name"
-                    />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-input
-                            label="Description"
-                            name="description"
-                            type="textarea"
-                            placeholder="More information you wish to specify about the list"
-                            resizable
-                    />
-                </f7-list-item>
+                <f7-list-input
+                        label="Name of your list"
+                        name="list-name"
+                        type="text"
+                        placeholder="My todo list Name"
+                />
+                <f7-list-input
+                        label="Description"
+                        name="description"
+                        type="textarea"
+                        placeholder="More information you wish to specify about the list"
+                        resizable
+                />
                 <input type="file" ref="file" style="display: none" accept="image/*" @change="getPreviewImage">
                 <f7-list-button @click="takePhoto()">
                     Take a photo of your list

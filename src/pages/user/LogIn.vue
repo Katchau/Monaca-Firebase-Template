@@ -6,22 +6,18 @@
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
             <f7-list-button class="close-login hidden" title="Continue" login-screen-close></f7-list-button>
             <f7-list form>
-                <f7-list-item>
-                    <f7-input
-                            label="Email"
-                            name="email"
-                            placeholder="Email"
-                            type="email"
-                    />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-input
-                            label="Password"
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                    />
-                </f7-list-item>
+                <f7-list-input
+                        label="Email"
+                        name="email"
+                        placeholder="Email"
+                        type="email"
+                />
+                <f7-list-input
+                        label="Password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                />
             </f7-list>
             <f7-list>
                 <f7-list-button @click="login()" title="Sign In"></f7-list-button>

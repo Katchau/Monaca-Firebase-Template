@@ -7,41 +7,33 @@
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
             <f7-list-button class="close-register hidden" href="/main/" title="Continue" login-screen-close></f7-list-button>
             <f7-list form>
-                <f7-list-item>
-                    <f7-input
-                            label="Username"
-                            name="username"
-                            placeholder="Your new Username"
-                            type="text"
-                            required
-                    />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-input
-                            label="Email"
-                            name="email"
-                            placeholder="Your Email Address"
-                            type="text"
-                            required
-                    />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-input
-                            label="Password"
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            required
-                    />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-input
-                            label="Password Confirmation"
-                            name="passwordconf"
-                            type="password"
-                            placeholder="Please introduce your password again"
-                    />
-                </f7-list-item>
+                <f7-list-input
+                        label="Username"
+                        name="username"
+                        placeholder="Your new Username"
+                        type="text"
+                        required
+                />
+                <f7-list-input
+                        label="Email"
+                        name="email"
+                        placeholder="Your Email Address"
+                        type="text"
+                        required
+                />
+                <f7-list-input
+                        label="Password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        required
+                />
+                <f7-list-input
+                        label="Password Confirmation"
+                        name="passwordconf"
+                        type="password"
+                        placeholder="Please introduce your password again"
+                />
             </f7-list>
             <f7-list>
                 <f7-list-button @click="register()" title="Sign In"/>
