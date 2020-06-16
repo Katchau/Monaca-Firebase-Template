@@ -18,7 +18,9 @@
 
 <script>
 // Import Routes
-import routes from './routes.js'
+import routes from './js/routes.js'
+import { Device }  from 'framework7/framework7-lite.esm.bundle.js';
+import cordovaApp from './js/cordova-app.js';
 
 export default {
   data() {
@@ -35,6 +37,15 @@ export default {
         },
       }
     }
+  },
+  mounted() {
+    this.$f7ready((f7) => {
+      // Init cordova APIs (see cordova-app.js)
+      if (Device.cordova) {
+        cordovaApp.init(f7);
+      }
+      // Call F7 APIs here
+    });
   }
 }
 </script>

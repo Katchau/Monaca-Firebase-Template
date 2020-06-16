@@ -7,22 +7,33 @@
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
             <f7-list-button class="close-register hidden" href="/main/" title="Continue" login-screen-close></f7-list-button>
             <f7-list form>
-                <f7-list-item>
-                    <f7-label>Username</f7-label>
-                    <f7-input name="username" placeholder="Your new Username" type="text" required />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-label>Email</f7-label>
-                    <f7-input name="email" placeholder="Your Email Address" type="text" required />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-label>Password</f7-label>
-                    <f7-input name="password" type="password" placeholder="Password" required />
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-label>Password Confirmation</f7-label>
-                    <f7-input name="passwordconf" type="password" placeholder="Please introduce your password again" />
-                </f7-list-item>
+                <f7-list-input
+                        label="Username"
+                        name="username"
+                        placeholder="Your new Username"
+                        type="text"
+                        required
+                />
+                <f7-list-input
+                        label="Email"
+                        name="email"
+                        placeholder="Your Email Address"
+                        type="text"
+                        required
+                />
+                <f7-list-input
+                        label="Password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        required
+                />
+                <f7-list-input
+                        label="Password Confirmation"
+                        name="passwordconf"
+                        type="password"
+                        placeholder="Please introduce your password again"
+                />
             </f7-list>
             <f7-list>
                 <f7-list-button @click="register()" title="Sign In"/>
@@ -39,7 +50,7 @@
 </template>
 
 <script>
-    const fb = require('@/firebaseConfig.js');
+    const fb = require('@/js/firebaseConfig.js');
     export default {
         name: "Register",
         data () {
@@ -71,7 +82,14 @@
                         return answer.user.updateProfile({
                             displayName: username
                         }).then(function () {
-                            self.$$('.close-register a').click();
+                            // self.$$('.close-register a').click();
+                            // f7router would'nt work here since this isn't the main activity
+                            self.$f7.views.main.router.navigate('/main/', {
+                                props: {
+                                    displayName: username,
+                                }
+                            });
+                            self.$refs.reg.close();
                         })
                     })
                     .catch(function(error) {

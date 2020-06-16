@@ -13,14 +13,19 @@
             </f7-navbar>
             <h3 v-if="errorMsg" class="red-text">{{errorMsg}}</h3>
             <f7-list form>
-                <f7-list-item>
-                    <f7-label>Name of your list</f7-label>
-                    <f7-input name="list-name" type="text" placeholder="My todo list Name"></f7-input>
-                </f7-list-item>
-                <f7-list-item>
-                    <f7-label>Description</f7-label>
-                    <f7-input name="description" type="textarea" placeholder="More information you wish to specify about the list" resizable></f7-input>
-                </f7-list-item>
+                <f7-list-input
+                        label="Name of your list"
+                        name="list-name"
+                        type="text"
+                        placeholder="My todo list Name"
+                />
+                <f7-list-input
+                        label="Description"
+                        name="description"
+                        type="textarea"
+                        placeholder="More information you wish to specify about the list"
+                        resizable
+                />
                 <input type="file" ref="file" style="display: none" accept="image/*" @change="getPreviewImage">
                 <f7-list-button @click="takePhoto()">
                     Take a photo of your list
@@ -37,7 +42,7 @@
 <script>
     import Framework7 from "framework7";
     import firebase from "firebase"
-    const fb = require('@/firebaseConfig.js');
+    const fb = require('@/js/firebaseConfig.js');
 
     export default {
         name: "Create",
@@ -53,9 +58,8 @@
         methods: {
 
             takePhoto () {
-                let app = new Framework7();
                 // TODO this still needs testing but the online thingy isnt building up the project properly
-                if (app.device.android || app.device.ios) {
+                if (Framework7.device.android || Framework7.device.ios) {
                     let successMethod = function (camera_url) {
                         this.previewImg = camera_url;
                     };

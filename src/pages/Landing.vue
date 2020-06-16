@@ -12,20 +12,18 @@
                 <f7-button fill raised login-screen-open="#login-screen">Login Screen</f7-button>
             </f7-list>
         </f7-block>
-        <f7-list-button class="closemain hidden" href="/main/"></f7-list-button>
     </f7-page>
 </template>
 
 <script>
-    const fb = require('@/firebaseConfig');
+    const fb = require('@/js/firebaseConfig');
 
     export default {
         mounted () {
             let self = this;
             fb.auth.onAuthStateChanged(user => {
-                if (user) {
-                    // TODO try changing to the router navigator after update because that isnt working rn
-                    self.$$('.closemain a').click();
+                if (user && user.displayName) {
+                    self.$f7router.navigate('/main/')
                 }
             })
         }

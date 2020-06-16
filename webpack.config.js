@@ -9,6 +9,7 @@ const argvs = require('yargs').argv;
 const devMode = process.env.WEBPACK_SERVE || argvs.mode === 'development';
 
 const DEFAULT_PORT = 8080;
+const target = process.env.TARGET || 'web';
 const host = process.env.MONACA_SERVER_HOST || argvs.host || '0.0.0.0';
 const port = argvs.port || DEFAULT_PORT;
 const wss = process.env.MONACA_TERMINAL ? true : false;
@@ -18,7 +19,7 @@ let webpackConfig = {
   mode: devMode ? 'development' : 'production',
 
   entry: {
-    app: ['./src/app.js']
+    app: ['./src/js/app.js']
   },
 
   output: {
@@ -36,7 +37,7 @@ let webpackConfig = {
     mergeDuplicateChunks: true,
     providedExports: true,
   },
-  
+
   resolve: {
     extensions: ['.js', '.vue', '.json', '.css', '.html', '.styl'],
     modules: [
@@ -66,7 +67,7 @@ let webpackConfig = {
           loader: 'babel-loader',
           options: {
             presets: [ 'env' ]
-          } 
+          }
         }]
       },
       {
@@ -89,7 +90,7 @@ let webpackConfig = {
       },
       {
         test: /\.css$/,
-        use: [          
+        use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
@@ -102,12 +103,21 @@ let webpackConfig = {
         ]
       },
       {
+        test: /\.less$/,
+        use: [
+          devMode ? 'style-loader' :  MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'less-loader',
+        ],
+      },
+      {
         test: /\.json$/,
         loader: 'json'
       }
     ]
   },
-  
+
   // See below for dev plugin management.
   plugins: [
     new VueLoaderPlugin(),
@@ -117,11 +127,11 @@ let webpackConfig = {
     }),
     new ProgressBarPlugin(),
   ],
- 
+
   resolveLoader: {
     modules: [ 'node_modules' ]
   },
- 
+
   performance: {
     hints: false
   }
@@ -154,6 +164,9 @@ if(devMode) {
   };
 
   let devPlugins = [
+    new webpack.DefinePlugin({
+      'process.env.TARGET': JSON.stringify(target),
+    }),
     new HtmlWebPackPlugin({
       template: 'src/public/index.html.ejs',
       chunksSortMode: 'dependency'
@@ -163,9 +176,12 @@ if(devMode) {
   webpackConfig.plugins = webpackConfig.plugins.concat( devPlugins　);
 
 } else {
-  
+
   // Production mode
   let prodPlugins = [
+    new webpack.DefinePlugin({
+      'process.env.TARGET': JSON.stringify(target),
+    }),
     new HtmlWebPackPlugin({
       template: 'src/public/index.html.ejs',
       chunksSortMode: 'dependency',
