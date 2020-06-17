@@ -17,7 +17,7 @@
         "vue": "^2.5.17"
     },
     "scripts": {
-        "monaca:preview": "npm run dev & ",
+        "monaca:preview": "npm run dev & npm run watch ",
         "monaca:transpile": "npm run build",
         "monaca:debug": "npm run watch",
         "dev": "webpack-serve --open",

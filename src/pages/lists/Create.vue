@@ -58,10 +58,12 @@
         methods: {
 
             takePhoto () {
+                let self = this;
                 // TODO this still needs testing but the online thingy isnt building up the project properly
                 if (Framework7.device.android || Framework7.device.ios) {
                     let successMethod = function (camera_url) {
-                        this.previewImg = camera_url;
+                        // "data:image/jpeg;base64," + maybe this is needed for ios?
+                        self.previewImg =  camera_url;
                     };
                     navigator.camera.getPicture(successMethod,
                         function() {
