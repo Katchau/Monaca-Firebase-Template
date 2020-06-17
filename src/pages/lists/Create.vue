@@ -49,10 +49,15 @@
 
         data () {
             return {
+                isMobile: false,
                 errorMsg: '',
                 previewImg: '',
                 imgFile: null
             }
+        },
+
+        mounted() {
+            this.isMobile = Framework7.device.android || Framework7.device.ios;
         },
 
         methods: {
@@ -60,17 +65,16 @@
             takePhoto () {
                 let self = this;
                 // TODO this still needs testing but the online thingy isnt building up the project properly
-                if (Framework7.device.android || Framework7.device.ios) {
+                if (this.isMobile) {
                     let successMethod = function (camera_url) {
-                        // "data:image/jpeg;base64," + maybe this is needed for ios?
-                        self.previewImg =  camera_url;
+                        self.previewImg =  "data:image/jpeg;base64," + camera_url;
                     };
                     navigator.camera.getPicture(successMethod,
                         function() {
-                            alert("Failed to get camera.");
+                            alert("Failed to get picture, please try again.");
                         }, {
                             quality : 50,
-                            destinationType : Camera.DestinationType.FILE_URI,
+                            destinationType : Camera.DestinationType.DATA_URL,
                             targetWidth : 420,
                             targetHeight : 420
                         });
@@ -102,7 +106,7 @@
 
                 let name = this.$$('#creation-page .input-with-value[name="list-name"]').val()
                     || new Date().toDateString() + ' list';
-                let description = this.$$('#creation-page .input-with-value[name="description"]').val();
+                let description = this.$$('#creation-page .input-with-value[name="description"]').val() || 'No description available';
                 let date = this.getCurrentDate();
                 let self = this;
 
@@ -131,9 +135,11 @@
                 let self = this;
                 let ref = fb.storage.ref();
                 // one way of making the file name unique is to use current time
-                let fileName = `${Date.now()}.${this.getFileExtension(this.imgFile.name)}`;
+                let fileName = `${Date.now()}.${this.isMobile ? 'jpeg' : this.getFileExtension(this.imgFile.name)}`;
+                let path = `images/${fb.auth.currentUser.uid}/${fileName}`;
 
-                let uploadTask = ref.child(`images/${fb.auth.currentUser.uid}/${fileName}`).put(this.imgFile);
+                let uploadTask = this.isMobile ? ref.child(path).putString(this.previewImg, 'data_url')
+                    : ref.child(path).put(this.imgFile);
 
                 // Listen for state changes, errors, and completion of the upload.
                 uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
