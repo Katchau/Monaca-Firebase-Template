@@ -61,15 +61,41 @@
 
 /* Your app styles here */
 #main-view .page-content {
-  padding: 25% 2%;
+  padding: 25% 2% 0;
 }
 
 #main-menu .page-content {
   padding: 64px 2% 0;
+  overflow-y: hidden;
+}
+
+#my-lists-view {
+  margin-top: 20px;
+}
+
+#my-lists-view .page {
+  height: 80%;
 }
 
 #my-lists-view .page-content{
   padding: 0;
+  overflow-y: auto;
+}
+
+#my-lists-view .todo-lists {
+  margin-top: 0;
+}
+
+#my-lists-view .todo-info {
+  width: 30%;
+  margin-right: 25px;
+  word-break: break-all;
+}
+
+#my-lists-view .todo-description {
+  word-break : break-all;
+  width: 66%;
+  text-align: center;
 }
 
 .block-header.landing-header {

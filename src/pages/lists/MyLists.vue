@@ -1,21 +1,24 @@
 <template>
     <f7-page>
-        <f7-list>
+        <f7-list class="todo-lists">
             <f7-photo-browser
                     :photos="curImgURL"
                     type="popup"
                     ref="popup"
             />
             <f7-list-item v-for="(todo, key) in todoList" :key="key" @click="$refs.popup.open(key)">
-                <b>
-                    {{todo.name}}
-                </b>
-                <p>
+                <div class="todo-info">
+                    <b>
+                        {{todo.name}}
+                    </b>
+                    <p>
+                        {{todo.date}}
+                    </p>
+                </div>
+
+                <p class="todo-description">
                     {{todo.description}}
                 </p>
-                <span>
-                    {{todo.date}}
-                </span>
             </f7-list-item>
         </f7-list>
     </f7-page>
