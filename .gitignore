@@ -109,4 +109,4 @@ dist
 # Webstorm folder
 .idea
 
-.www/
+www/
