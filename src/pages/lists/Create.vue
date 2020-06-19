@@ -30,7 +30,7 @@
                 <f7-list-button @click="takePhoto()">
                     Take a photo of your list
                 </f7-list-button>
-                <img class="preview-img" :src="previewImg" alt="" height="250px"/>
+                <img class="preview-img" :src="previewImg" alt="" />
                 <f7-button class="add-button" @click="submitForm()" small>
                     Submit
                 </f7-button>
