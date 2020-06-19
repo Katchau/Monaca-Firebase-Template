@@ -109,4 +109,5 @@ dist
 # Webstorm folder
 .idea
 
+# Compiled content for Monaca
 www/
