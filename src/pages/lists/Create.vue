@@ -104,6 +104,7 @@
 
             updateDatabase(downloadURL) {
 
+                // you could either make these fields mandatory or use a default value since FB does not accept empty strings
                 let name = this.$$('#creation-page .input-with-value[name="list-name"]').val()
                     || new Date().toDateString() + ' list';
                 let description = this.$$('#creation-page .input-with-value[name="description"]').val() || 'No description available';
@@ -134,10 +135,12 @@
                 }
                 let self = this;
                 let ref = fb.storage.ref();
+
                 // one way of making the file name unique is to use current time
                 let fileName = `${Date.now()}.${this.isMobile ? 'jpeg' : this.getFileExtension(this.imgFile.name)}`;
                 let path = `images/${fb.auth.currentUser.uid}/${fileName}`;
 
+                // We are using 2 different ways of uploading pictures which use different types of data
                 let uploadTask = this.isMobile ? ref.child(path).putString(this.previewImg, 'data_url')
                     : ref.child(path).put(this.imgFile);
 
@@ -147,6 +150,7 @@
                         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                         // this can be useful to do loading sections or anything
                     }, function(error) {
+                        // do something in case an error occurs
                         console.log("Error at uploading picture " + error.code)
                     }, function() {
 

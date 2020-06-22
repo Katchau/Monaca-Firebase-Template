@@ -14,7 +14,7 @@ import 'framework7/css/framework7.bundle.css';
 import '@/css/icons.css';
 import '@/css/app.less';
 
-//add firebase configuration and initialize it
+// Import firebase configuration. This can be used to make the application wait for it to initialize.
 const fb = require('@/js/firebaseConfig.js');
 
 // Import App Component

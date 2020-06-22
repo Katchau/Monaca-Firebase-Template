@@ -22,20 +22,11 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 const auth = firebase.auth();
 
-// const auth = firebase.auth();
+// These are optional parameters you can export to make it faster to access later on the app
 // const currentUser = auth.currentUser
-//
-// // date issue fix according to firebase
-// const settings = {
-//     timestampsInSnapshots: true
-// }
-// db.settings(settings)
-//
-// // firebase collections
+// firebase collections
 // const usersCollection = db.collection('users')
 // const postsCollection = db.collection('posts')
-// const commentsCollection = db.collection('comments')
-// const likesCollection = db.collection('likes')
 
 export {
     auth,

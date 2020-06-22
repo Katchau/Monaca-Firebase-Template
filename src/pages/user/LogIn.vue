@@ -62,7 +62,6 @@
                         // Handle Errors here.
                         self.errorMsg = error.message;
                     });
-                // app.dialog.alert('Username: ' + username + '<br>Password: ' + password);
             }
         }
     }

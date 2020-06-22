@@ -82,7 +82,6 @@
                         return answer.user.updateProfile({
                             displayName: username
                         }).then(function () {
-                            // self.$$('.close-register a').click();
                             // f7router would'nt work here since this isn't the main activity
                             self.$f7.views.main.router.navigate('/main/', {
                                 props: {
@@ -96,7 +95,7 @@
                         // Handle Errors here.
                         self.errorMsg = error.message;
                     });
-                // app.dialog.alert('Username: ' + username + '<br>Password: ' + password);
+
             }
         }
     }

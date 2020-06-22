@@ -23,6 +23,9 @@
             let self = this;
             fb.auth.onAuthStateChanged(user => {
                 if (user && user.displayName) {
+                    // we are redirecting here when opening the app in case the user is still logged in
+                    // or if he just logged in. this is because when registering the displayName does not update
+                    // so we have to update the router only at that time
                     self.$f7router.navigate('/main/')
                 }
             })
