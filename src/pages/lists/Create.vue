@@ -67,16 +67,7 @@
                 // TODO this still needs testing but the online thingy isnt building up the project properly
                 if (this.isMobile) {
                     let successMethod = function (camera_url) {
-                        // self.previewImg =  "data:image/jpeg;base64," + camera_url;
-                        // let curDir = camera_url.substring(0, camera_url.lastIndexOf('/') + 1);
-                        // let curFile = camera_url.substring(camera_url.lastIndexOf('/') + 1, camera_url.length);
-                        //
-                        // FileReader.readAsArrayBuffer(curDir, curFile)
-                        //     .then(function (success) {
-                        //         self.imgFile = new Blob([success], {type: 'image/jpeg'});
-                        //     }, function (error) {
-                        //         console.error(error);
-                        //     });
+
                         window.resolveLocalFileSystemURL(camera_url, function (fileEntry) {
                             fileEntry.file(function (file) {
                                 let reader = new FileReader();
@@ -170,7 +161,7 @@
                 uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
                     function(snapshot) {
                         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                        // this can be useful to do loading sections or anything
+                        // this can be useful to do loading sections for example
                     }, function(error) {
                         // do something in case an error occurs
                         console.log("Error at uploading picture " + error.code)
