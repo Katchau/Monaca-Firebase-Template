@@ -111,3 +111,7 @@ dist
 
 # Compiled content for Monaca
 www/
+
+# Plugins folder
+
+plugins/

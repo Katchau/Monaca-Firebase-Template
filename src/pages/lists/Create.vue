@@ -67,14 +67,29 @@
                 // TODO this still needs testing but the online thingy isnt building up the project properly
                 if (this.isMobile) {
                     let successMethod = function (camera_url) {
-                        self.previewImg =  "data:image/jpeg;base64," + camera_url;
+
+                        window.resolveLocalFileSystemURL(camera_url, function (fileEntry) {
+                            fileEntry.file(function (file) {
+                                let reader = new FileReader();
+                                reader.onloadend = function () {
+                                    // This blob object can be saved to firebase
+                                    self.imgFile = new Blob([new Uint8Array(this.result)], { type: "image/jpeg" });
+                                    self.previewImg = URL.createObjectURL(self.imgFile);
+                                };
+                                reader.readAsArrayBuffer(file);
+                            });
+                        }, function (error) {
+                            console.log(error.message)
+                        });
                     };
+
+                    let destination = Framework7.device.android ? Camera.DestinationType.FILE_URI : Camera.DestinationType.NATIVE_URI;
                     navigator.camera.getPicture(successMethod,
                         function() {
                             alert("Failed to get picture, please try again.");
                         }, {
                             quality : 50,
-                            destinationType : Camera.DestinationType.DATA_URL,
+                            destinationType : destination,
                             targetWidth : 420,
                             targetHeight : 420
                         });
@@ -140,15 +155,13 @@
                 let fileName = `${Date.now()}.${this.isMobile ? 'jpeg' : this.getFileExtension(this.imgFile.name)}`;
                 let path = `images/${fb.auth.currentUser.uid}/${fileName}`;
 
-                // We are using 2 different ways of uploading pictures which use different types of data
-                let uploadTask = this.isMobile ? ref.child(path).putString(this.previewImg, 'data_url')
-                    : ref.child(path).put(this.imgFile);
+                let uploadTask = ref.child(path).put(this.imgFile);
 
                 // Listen for state changes, errors, and completion of the upload.
                 uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
                     function(snapshot) {
                         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                        // this can be useful to do loading sections or anything
+                        // this can be useful to do loading sections for example
                     }, function(error) {
                         // do something in case an error occurs
                         console.log("Error at uploading picture " + error.code)
