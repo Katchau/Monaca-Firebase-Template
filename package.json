@@ -4,7 +4,7 @@
     "description": "",
     "dependencies": {
         "cordova-custom-config": "5.1.0",
-        "cordova-plugin-camera": "4.0.3",
+        "cordova-plugin-camera": "4.1.0",
         "cordova-plugin-file": "^6.0.2",
         "cordova-plugin-splashscreen": "5.0.2",
         "cordova-plugin-statusbar": "2.4.2",
@@ -15,7 +15,8 @@
         "framework7-vue": "^5.7.7",
         "material-design-icons": "^3.0.1",
         "monaca-plugin-monaca-core": "3.3.0",
-        "vue": "^2.5.17"
+        "vue": "^2.5.17",
+        "cordova-plugin-wkwebview-engine": "1.2.1"
     },
     "scripts": {
         "monaca:preview": "npm run dev & npm run watch ",
@@ -34,8 +35,12 @@
             "cordova-plugin-whitelist": {},
             "cordova-plugin-statusbar": {},
             "monaca-plugin-monaca-core": {},
-            "cordova-plugin-camera": {},
-            "cordova-plugin-file": {}
+            "cordova-plugin-camera": {
+                "CAMERA_USAGE_DESCRIPTION": "need camera access to take pictures",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": "need access to get pictures"
+            },
+            "cordova-plugin-file": {},
+            "cordova-plugin-wkwebview-engine": {}
         }
     },
     "devDependencies": {
