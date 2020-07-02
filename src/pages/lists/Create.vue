@@ -87,6 +87,7 @@
                     navigator.camera.getPicture(successMethod,
                         function() {
                             alert("Failed to get picture, please try again.");
+                            self.errorMsg = "Unexpected error at selecting picture. Please try again"
                         }, {
                             quality : 50,
                             destinationType : destination,
@@ -138,7 +139,8 @@
                         self.$refs.cPopUp.close();
                     })
                     .catch(function(error) {
-                        console.log("Error at updating database " + error.message)
+                        console.log("Error at updating database " + error.message);
+                        self.errorMsg = "Error Updating Database, please try again later"
                     });
             },
 
@@ -164,7 +166,8 @@
                         // this can be useful to do loading sections for example
                     }, function(error) {
                         // do something in case an error occurs
-                        console.log("Error at uploading picture " + error.code)
+                        console.log("Error at uploading picture " + error.code);
+                        self.errorMsg = "Error at uploading picture, please try again later!"
                     }, function() {
 
                         // Upload completed successfully, now we can get the download URL and update the database
