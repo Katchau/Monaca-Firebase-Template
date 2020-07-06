@@ -64,7 +64,7 @@
 
             takePhoto () {
                 let self = this;
-                // TODO this still needs testing but the online thingy isnt building up the project properly
+
                 if (this.isMobile) {
                     let successMethod = function (camera_url) {
 
