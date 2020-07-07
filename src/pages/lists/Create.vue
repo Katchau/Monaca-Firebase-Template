@@ -62,28 +62,33 @@
 
         methods: {
 
+            savePhoto (self, camera_url) {
+                window.resolveLocalFileSystemURL(camera_url, function (fileEntry) {
+                    fileEntry.file(function (file) {
+                        let reader = new FileReader();
+                        reader.onloadend = function () {
+                            // This blob object can be saved to firebase
+                            self.imgFile = new Blob([new Uint8Array(this.result)], { type: "image/jpeg" });
+                            self.previewImg = URL.createObjectURL(self.imgFile);
+                        };
+                        reader.readAsArrayBuffer(file);
+                    });
+                }, function (error) {
+                    self.errorMsg = "Unexpected error at saving picture. Please try again";
+                    console.log(error.message)
+                });
+            },
+
             takePhoto () {
                 let self = this;
 
                 if (this.isMobile) {
-                    let successMethod = function (camera_url) {
+                    let destination = Framework7.device.android ? Camera.DestinationType.FILE_URI : Camera.DestinationType.NATIVE_URI;
 
-                        window.resolveLocalFileSystemURL(camera_url, function (fileEntry) {
-                            fileEntry.file(function (file) {
-                                let reader = new FileReader();
-                                reader.onloadend = function () {
-                                    // This blob object can be saved to firebase
-                                    self.imgFile = new Blob([new Uint8Array(this.result)], { type: "image/jpeg" });
-                                    self.previewImg = URL.createObjectURL(self.imgFile);
-                                };
-                                reader.readAsArrayBuffer(file);
-                            });
-                        }, function (error) {
-                            console.log(error.message)
-                        });
+                    let successMethod = function (camera_url) {
+                        self.savePhoto(self, camera_url);
                     };
 
-                    let destination = Framework7.device.android ? Camera.DestinationType.FILE_URI : Camera.DestinationType.NATIVE_URI;
                     navigator.camera.getPicture(successMethod,
                         function() {
                             alert("Failed to get picture, please try again.");
